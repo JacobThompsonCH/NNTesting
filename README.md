@@ -1,122 +1,207 @@
-<!-- BEGIN_TF_DOCS -->
+Usage:
+
+Example of 'foo_bar' module in `foo_bar.tf`.
+
+- list item 1
+- list item 2
+
+Even inline **formatting** in _here_ is possible.
+and some [link](https://domain.com/)
+
+* list item 3
+* list item 4
+
+```hcl
+module "foo_bar" {
+  source = "github.com/foo/bar"
+
+  id   = "1234567890"
+  name = "baz"
+
+  zones = ["us-east-1", "us-west-1"]
+
+  tags = {
+    Name         = "baz"
+    Created-By   = "first.last@email.com"
+    Date-Created = "20180101"
+  }
+}
+```
+
+Here is some trailing text after code block,
+followed by another line of text.
+
+| Name | Description     |
+|------|-----------------|
+| Foo  | Foo description |
+| Bar  | Bar description |
 
 
-[36mrequirement.terraform[0m (~> 1.5.0)
-[36mrequirement.aws[0m (~> 4.59.0)
+requirement.terraform (>= 0.12)
+requirement.aws (>= 2.15.0)
+requirement.foo (>= 1.0)
+requirement.random (>= 2.2.0)
 
 
-[36mprovider.aws[0m (~> 4.59.0)
+provider.aws (>= 2.15.0)
+provider.aws.ident (>= 2.15.0)
+provider.foo (>= 1.0)
+provider.null
+provider.tls
 
 
-[36mmodule.fsx[0m (git::git@gitlab.us.nelnet.biz:flyway/core/tf-consumable-modules/nn-tf-fsx//,v0.0.6)
-[36mmodule.fsx_quorum[0m (git::git@gitlab.us.nelnet.biz:flyway/core/tf-consumable-modules/nn-tf-fsx//,v0.0.6)
-[36mmodule.fsx_quorum_sg[0m (git::git@gitlab.us.nelnet.biz:flyway/core/tf-consumable-modules/nn-tf-ec2-securitygroup//,v0.5.0)
-[36mmodule.fsx_sg[0m (git::git@gitlab.us.nelnet.biz:flyway/core/tf-consumable-modules/nn-tf-ec2-securitygroup//,v0.5.0)
-[36mmodule.fsx_software[0m (git::git@gitlab.us.nelnet.biz:flyway/core/tf-consumable-modules/nn-tf-fsx//,v0.0.6)
-[36mmodule.fsx_software_sg[0m (git::git@gitlab.us.nelnet.biz:flyway/core/tf-consumable-modules/nn-tf-ec2-securitygroup//,v0.5.0)
+module.bar (baz,4.5.6)
+module.baz (baz,4.5.6)
+module.foo (bar,1.2.3)
+module.foobar (git@github.com:module/path,v7.8.9)
 
 
-[36mdata.aws_kms_key.default (data source)[0m (https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/kms_key)
-[36mdata.aws_kms_key.default_key (data source)[0m (https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/kms_key)
-[36mdata.aws_region.current (data source)[0m (https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region)
-[36mdata.aws_secretsmanager_secret.prodad (data source)[0m (https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/secretsmanager_secret)
-[36mdata.aws_secretsmanager_secret_version.fsx_ad_join (data source)[0m (https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/secretsmanager_secret_version)
+resource.foo_resource.baz (resource)
+resource.null_resource.foo (resource) (https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource)
+resource.tls_private_key.baz (resource) (https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key)
+data.aws_caller_identity.current (data source) (https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity)
+data.aws_caller_identity.ident (data source) (https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity)
 
 
-[36minput.CI_PROJECT_NAME[0m (required)
-[90mThe Gitlab Project name set from the pipeline variables[0m
+input.bool-1 (true)
+It's bool number one.
 
-[36minput.IAC_ORIGIN_VERSION[0m (required)
-[90mGitlab project branch or tag for deployment[0m
+input.bool-2 (false)
+It's bool number two.
 
-[36minput.aliases[0m (required)
-[90mAn array DNS alias names that you want to associate with the Amazon FSx file system[0m
+input.bool-3 (true)
+n/a
 
-[36minput.app_name[0m (required)
-[90mn/a[0m
+input.bool_default_false (false)
+n/a
 
-[36minput.aws_backup_tags[0m ({})
-[90mAWS Backup tags[0m
+input.input-with-code-block ([
+  "name rack:location"
+])
+This is a complicated one. We need a newline.  
+And an example in a code block
+```
+default     = [
+  "machine rack01:neptune"
+]
+```
 
-[36minput.custom_rules[0m ({})
-[90mn/a[0m
+input.input-with-pipe ("v1")
+It includes v1 | v2 | v3
 
-[36minput.data_classification[0m (null)
-[90mData classification label per ADR-14 [0m
+input.input_with_underscores (required)
+A variable with underscores.
 
-[36minput.default_key[0m (null)
-[90mkms key alias, id, or arn of key for resource (ebs, s3, etc.) encryption[0m
+input.list-1 ([
+  "a",
+  "b",
+  "c"
+])
+It's list number one.
 
-[36minput.default_key_pair[0m (required)
-[90mkey pair to be used for the ec2 instance[0m
+input.list-2 (required)
+It's list number two.
 
-[36minput.default_subnets[0m (null)
-[90mList of all subnets[0m
+input.list-3 ([])
+n/a
 
-[36minput.default_vpc_name[0m (required)
-[90maws vpc[0m
+input.list_default_empty ([])
+n/a
 
-[36minput.domain_name[0m ("nulsc.biz")
-[90mNelnet domain[0m
+input.long_type ({
+  "bar": {
+    "bar": "bar",
+    "foo": "bar"
+  },
+  "buzz": [
+    "fizz",
+    "buzz"
+  ],
+  "fizz": [],
+  "foo": {
+    "bar": "foo",
+    "foo": "foo"
+  },
+  "name": "hello"
+})
+This description is itself markdown.
 
-[36minput.env[0m (required)
-[90mshorter environmental team name[0m
+It spans over multiple lines.
 
-[36minput.file_system_administrators_group[0m (required)
-[90mThe name of the domain group whose members are granted administrative privileges for the file system[0m
+input.map-1 ({
+  "a": 1,
+  "b": 2,
+  "c": 3
+})
+It's map number one.
 
-[36minput.fs_name[0m (required)
-[90mName prefix for FSx filesystem[0m
+input.map-2 (required)
+It's map number two.
 
-[36minput.fsx_quorum_sg_rules[0m ({})
-[90mn/a[0m
+input.map-3 ({})
+n/a
 
-[36minput.fsx_quorum_storage_capacity[0m (32)
-[90mStorage capacity (GiB) of the sql quorum fsx file system[0m
+input.no-escape-default-value ("VALUE_WITH_UNDERSCORE")
+The description contains `something_with_underscore`. Defaults to 'VALUE_WITH_UNDERSCORE'.
 
-[36minput.fsx_sg_rules[0m ({})
-[90mn/a[0m
+input.number-1 (42)
+It's number number one.
 
-[36minput.fsx_software_sg_rules[0m ({})
-[90mn/a[0m
+input.number-2 (required)
+It's number number two.
 
-[36minput.fsx_software_storage_capacity[0m (32)
-[90mStorage capacity (GiB) of the sql software fsx file system[0m
+input.number-3 ("19")
+n/a
 
-[36minput.fsx_storage_capacity[0m (32)
-[90mStorage capacity (GiB) of the sql backups fsx file system[0m
+input.number-4 (15.75)
+n/a
 
-[36minput.fsx_tags[0m ({})
-[90mTags used for FSx deployment[0m
+input.number_default_zero (0)
+n/a
 
-[36minput.organizational_unit_distinguished_name[0m ("OU=WindowsServers,DC=nulsc,DC=biz")
-[90mOU controlled by FSx service account[0m
+input.object_default_empty ({})
+n/a
 
-[36minput.preferred_subnet_id[0m (null)
-[90mID of primary private subnet for target fsx deployment.[0m
+input.string-1 ("bar")
+It's string number one.
 
-[36minput.quorum_fs_name[0m (required)
-[90mName prefix for FSx filesystem[0m
+input.string-2 (required)
+It's string number two.
 
-[36minput.region[0m (required)
-[90maws region[0m
+input.string-3 ("")
+n/a
 
-[36minput.software_fs_name[0m (required)
-[90mName prefix for FSx filesystem[0m
+input.string-special-chars ("\\.<>[]{}_-")
+n/a
 
-[36minput.subnet_ids[0m (required)
-[90mA list of IDs for the subnets that the file system will be accessible from.[0m
+input.string_default_empty ("")
+n/a
 
-[36minput.weekly_maintenance_start_time[0m ("0:01:00")
-[90mPreferred start time to perform weekly maintenance, in the UTC time zone[0m
+input.string_default_null (null)
+n/a
+
+input.string_no_default (required)
+n/a
+
+input.unquoted (required)
+n/a
+
+input.with-url ("")
+The description contains url. https://www.domain.com/foo/bar_baz.html
 
 
-[36moutput.quorum_fsx[0m
-[90mfsx details[0m
+output.output-0.12
+terraform 0.12 only
 
-[36moutput.secret_server_fsx[0m
-[90mfsx details[0m
+output.output-1
+It's output number one.
 
-[36moutput.software_fsx[0m
-[90mfsx details[0m
-<!-- END_TF_DOCS -->
+output.output-2
+It's output number two.
+
+output.unquoted
+It's unquoted output.
+
+## This is an example of a footer
+
+It looks exactly like a header, but is placed at the end of the document
